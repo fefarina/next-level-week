@@ -1,17 +1,38 @@
-import express from 'express';
+import express, { request, response } from 'express';
 
 const app = express();
+
+
+const users = [
+    'Diego',
+    'Cleiton',
+    'Robson',
+    'Felipe'
+];
 
 app.get('/users', (request, response) => {
     console.log('Listagem de usuários');
 
-    response.json([
-        'Diego',
-        'Cleiton',
-        'Robson',
-        'Felipe'
-    ]);
+    return response.json();
 });
+
+app.get('/users/:id', (request, response) => {
+    const id = Number(request.params.id);
+
+    const user = users[id];
+
+    return response.json(user);
+});
+
+
+app.post('/users', (request, response) => {
+    const user = {
+        name: 'Felipe',
+        email: "wfelipefarina@gmail.com"
+    };
+
+    return response.json(user);
+})
 
 app.listen(8080);
 
